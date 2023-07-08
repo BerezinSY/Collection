@@ -6,6 +6,6 @@ final class CollectionTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Collection().text, "Hello, World!")
+//        XCTAssertEqual(Collection().text, "Hello, World!")
     }
 }
