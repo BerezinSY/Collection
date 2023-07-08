@@ -5,4 +5,5 @@ public protocol CollectionModel {
     var items: [Item] { get }
     var header: Header { get }
     var isShowHeader: Bool { get }
+    var isShowFooter: Bool { get }
 }

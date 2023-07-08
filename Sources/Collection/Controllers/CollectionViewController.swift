@@ -56,6 +56,7 @@ open class CollectionViewController<
     }
     
     open override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard content[indexPath.section].isShowHeader else { return UICollectionReusableView() }
         let item = content[indexPath.section].header
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.id, for: indexPath) as? Header
         view?.item = item
@@ -68,11 +69,13 @@ open class CollectionViewController<
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        layoutModel.insetForSection(at: section)
+        guard content[section].isShowHeader else { return .zero }
+        return layoutModel.insetForSection(at: section)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        layoutModel.referenceSizeForHeader(in: section)
+        guard content[section].isShowHeader else { return .zero }
+        return layoutModel.referenceSizeForHeader(in: section)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -80,7 +83,8 @@ open class CollectionViewController<
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        layoutModel.referenceSizeForFooter(in: section)
+        guard content[section].isShowFooter else { return .zero }
+        return layoutModel.referenceSizeForFooter(in: section)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
