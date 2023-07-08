@@ -2,6 +2,7 @@ import UIKit
 
 open class CollectionViewController<
     T: CollectionModel,
+    Header: CollectionReusableView<T.Header>,
     Cell: CollectionViewCell<T.Item>>: UICollectionViewController {
     
     public var content: [T] = [] {
@@ -29,6 +30,11 @@ open class CollectionViewController<
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.layer.backgroundColor = UIColor.clear.cgColor
         collectionView.register(Cell.nib, forCellWithReuseIdentifier: Cell.id)
+        collectionView.register(
+            Header.nib,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: Header.id
+        )
     }
     
     // MARK: UICollectionViewDataSource
@@ -45,5 +51,12 @@ open class CollectionViewController<
         let item = content[indexPath.section].items[indexPath.item]
         cell?.item = item
         return cell ?? UICollectionViewCell()
+    }
+    
+    open override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let item = content[indexPath.section].header
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.id, for: indexPath) as? Header
+        view?.item = item
+        return view ?? UICollectionReusableView()
     }
 }
