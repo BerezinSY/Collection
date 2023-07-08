@@ -7,7 +7,6 @@ public protocol LayoutModel {
     func referenceSizeForFooter(in section: Int) -> CGSize
     func minimumInteritemSpacing(for section: Int) -> CGFloat
     func minimumLineSpacingForSection(for section: Int) -> CGFloat
-    
 }
 
 extension LayoutModel {
