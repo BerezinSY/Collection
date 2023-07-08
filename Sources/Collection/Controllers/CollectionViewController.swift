@@ -11,7 +11,7 @@ open class CollectionViewController<
         }
     }
     
-    public var layoutModel: LayoutModel { CollectionLayoutModel() }
+    open var layoutModel: LayoutModel { CollectionLayoutModel() }
     
     public required init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
