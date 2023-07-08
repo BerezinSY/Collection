@@ -9,7 +9,7 @@ public protocol LayoutModel {
     func minimumLineSpacingForSection(for section: Int) -> CGFloat
 }
 
-extension LayoutModel {
+public extension LayoutModel {
     func sizeForItem(at indexPath: IndexPath) -> CGSize {
         CGSize(width: 50, height: 50)
     }
