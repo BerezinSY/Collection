@@ -43,7 +43,10 @@ open class CollectionViewController<
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: Header.id
         )
-        
+    }
+    
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         collectionViewFlowLayout?.estimatedItemSize = layoutModel.estimatedItemSize
     }
     
