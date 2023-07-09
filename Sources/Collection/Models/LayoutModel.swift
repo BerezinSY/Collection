@@ -1,7 +1,8 @@
 import UIKit
 
 public protocol LayoutModel {
-    func sizeForItem(at indexPath: IndexPath) -> CGSize
+    var estimatedItemSize: CGSize { get }
+    
     func insetForSection(at section: Int) -> UIEdgeInsets
     func referenceSizeForHeader(in section: Int) -> CGSize
     func referenceSizeForFooter(in section: Int) -> CGSize
@@ -10,7 +11,7 @@ public protocol LayoutModel {
 }
 
 public extension LayoutModel {
-    func sizeForItem(at indexPath: IndexPath) -> CGSize {
+    var estimatedItemSize: CGSize {
         CGSize(width: 50, height: 50)
     }
     

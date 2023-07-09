@@ -15,6 +15,10 @@ open class CollectionViewController<
     open var layoutModelWithSection: LayoutModel { CollectionLayoutModel() }
     open var layoutModelWithoutSection: LayoutModel { CollectionLayoutModel() }
     
+    private var collectionViewFlowLayout: UICollectionViewFlowLayout? {
+        collectionViewLayout as? UICollectionViewFlowLayout
+    }
+    
     public required init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
@@ -39,6 +43,8 @@ open class CollectionViewController<
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: Header.id
         )
+        
+        collectionViewFlowLayout?.estimatedItemSize = layoutModel.estimatedItemSize
     }
     
     // MARK: UICollectionViewDataSource
@@ -66,10 +72,6 @@ open class CollectionViewController<
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        layoutModel.sizeForItem(at: indexPath)
-    }
-    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         guard content[section].isShowHeader else { return layoutModelWithoutSection.insetForSection(at: section) }
         return layoutModelWithSection.insetForSection(at: section)
