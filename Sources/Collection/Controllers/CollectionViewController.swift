@@ -11,6 +11,8 @@ open class CollectionViewController<
         }
     }
     
+    public var collectionViewHeight: NSLayoutConstraint?
+    
     open var estimatedItemSize: CGSize {
         CGSize(width: 50, height: 50)
     }
@@ -50,6 +52,7 @@ open class CollectionViewController<
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionViewHeight()
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.layer.backgroundColor = UIColor.clear.cgColor
@@ -63,11 +66,25 @@ open class CollectionViewController<
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        changeCollectionViewHeightConstant()
         collectionViewFlowLayout?.sectionInset = sectionInset
         collectionViewFlowLayout?.estimatedItemSize = estimatedItemSize
         collectionViewFlowLayout?.minimumLineSpacing = minimumLineSpacing
         collectionViewFlowLayout?.headerReferenceSize = headerReferenceSize
         collectionViewFlowLayout?.minimumInteritemSpacing = minimumInteritemSpacing
+    }
+    
+    public func activateCollectionViewHeightBasedOnContent() {
+        collectionViewHeight?.isActive = true
+    }
+    
+    private func changeCollectionViewHeightConstant() {
+        let constant = collectionViewLayout.collectionViewContentSize.height
+        collectionViewHeight?.constant = constant
+    }
+    
+    private func setupCollectionViewHeight() {
+        collectionViewHeight = view.heightAnchor.constraint(equalToConstant: 0)
     }
     
     // MARK: UICollectionViewDataSource
