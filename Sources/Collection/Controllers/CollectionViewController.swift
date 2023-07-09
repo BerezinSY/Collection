@@ -11,11 +11,9 @@ open class CollectionViewController<
         }
     }
     
-    open var layoutModel: LayoutModel { CollectionLayoutModel() }
-    open var layoutModelWithFooter: LayoutModel { CollectionLayoutModel() }
-    open var layoutModelWithSection: LayoutModel { CollectionLayoutModel() }
-    open var layoutModelWithoutFooter: LayoutModel { CollectionLayoutModel() }
-    open var layoutModelWithoutSection: LayoutModel { CollectionLayoutModel() }
+    open var estimatedItemSize: CGSize {
+        CGSize(width: 50, height: 50)
+    }
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout? {
         collectionViewLayout as? UICollectionViewFlowLayout
@@ -49,7 +47,7 @@ open class CollectionViewController<
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionViewFlowLayout?.estimatedItemSize = layoutModel.estimatedItemSize
+        collectionViewFlowLayout?.estimatedItemSize = estimatedItemSize
     }
     
     // MARK: UICollectionViewDataSource
@@ -74,29 +72,5 @@ open class CollectionViewController<
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.id, for: indexPath) as? Header
         view?.item = item
         return view ?? UICollectionReusableView()
-    }
-    
-    // MARK: UICollectionViewDelegateFlowLayout
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard content[section].isShowHeader else { return layoutModelWithoutSection.insetForSection(at: section) }
-        return layoutModelWithSection.insetForSection(at: section)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard content[section].isShowHeader else { return layoutModelWithoutSection.referenceSizeForHeader(in: section) }
-        return layoutModelWithSection.referenceSizeForHeader(in: section)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        layoutModel.minimumLineSpacingForSection(for: section)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        guard content[section].isShowFooter else { return layoutModelWithoutFooter.referenceSizeForFooter(in: section) }
-        return layoutModelWithFooter.referenceSizeForFooter(in: section)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        layoutModel.minimumInteritemSpacing(for: section)
     }
 }
