@@ -12,7 +12,9 @@ open class CollectionViewController<
     }
     
     open var layoutModel: LayoutModel { CollectionLayoutModel() }
+    open var layoutModelWithFooter: LayoutModel { CollectionLayoutModel() }
     open var layoutModelWithSection: LayoutModel { CollectionLayoutModel() }
+    open var layoutModelWithoutFooter: LayoutModel { CollectionLayoutModel() }
     open var layoutModelWithoutSection: LayoutModel { CollectionLayoutModel() }
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout? {
@@ -90,8 +92,8 @@ open class CollectionViewController<
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        guard content[section].isShowFooter else { return layoutModelWithoutSection.referenceSizeForFooter(in: section) }
-        return layoutModelWithSection.referenceSizeForFooter(in: section)
+        guard content[section].isShowFooter else { return layoutModelWithoutFooter.referenceSizeForFooter(in: section) }
+        return layoutModelWithFooter.referenceSizeForFooter(in: section)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
