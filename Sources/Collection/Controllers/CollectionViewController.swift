@@ -16,7 +16,15 @@ open class CollectionViewController<
     }
     
     open var headerReferenceSize: CGSize {
-        CGSize(width: 0, height: 0)
+        .zero
+    }
+    
+    open var minimumLineSpacing: CGFloat {
+        10
+    }
+    
+    open var minimumInteritemSpacing: CGFloat {
+        10
     }
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout? {
@@ -52,7 +60,9 @@ open class CollectionViewController<
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionViewFlowLayout?.estimatedItemSize = estimatedItemSize
+        collectionViewFlowLayout?.minimumLineSpacing = minimumLineSpacing
         collectionViewFlowLayout?.headerReferenceSize = headerReferenceSize
+        collectionViewFlowLayout?.minimumInteritemSpacing = minimumInteritemSpacing
     }
     
     // MARK: UICollectionViewDataSource
