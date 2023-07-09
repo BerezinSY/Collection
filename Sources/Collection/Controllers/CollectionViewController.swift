@@ -3,7 +3,7 @@ import UIKit
 open class CollectionViewController<
     T: CollectionModel,
     Header: CollectionReusableView<T.Header>,
-    Cell: CollectionViewCell<T.Item>>: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    Cell: CollectionViewCell<T.Item>>: UICollectionViewController {
     
     public var content: [T] = [] {
         didSet {
