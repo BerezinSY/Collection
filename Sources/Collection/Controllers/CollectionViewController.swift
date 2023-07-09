@@ -11,8 +11,6 @@ open class CollectionViewController<
         }
     }
     
-    public var collectionViewHeight: NSLayoutConstraint?
-    
     open var estimatedItemSize: CGSize {
         CGSize(width: 50, height: 50)
     }
@@ -25,6 +23,10 @@ open class CollectionViewController<
         .zero
     }
     
+    open var footerReferenceSize: CGSize {
+        .zero
+    }
+    
     open var minimumLineSpacing: CGFloat {
         10
     }
@@ -32,6 +34,8 @@ open class CollectionViewController<
     open var minimumInteritemSpacing: CGFloat {
         10
     }
+    
+    private var collectionViewHeight: NSLayoutConstraint?
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout? {
         collectionViewLayout as? UICollectionViewFlowLayout
@@ -71,6 +75,7 @@ open class CollectionViewController<
         collectionViewFlowLayout?.estimatedItemSize = estimatedItemSize
         collectionViewFlowLayout?.minimumLineSpacing = minimumLineSpacing
         collectionViewFlowLayout?.headerReferenceSize = headerReferenceSize
+        collectionViewFlowLayout?.footerReferenceSize = footerReferenceSize
         collectionViewFlowLayout?.minimumInteritemSpacing = minimumInteritemSpacing
     }
     
