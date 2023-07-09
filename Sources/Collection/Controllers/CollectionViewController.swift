@@ -15,6 +15,10 @@ open class CollectionViewController<
         CGSize(width: 50, height: 50)
     }
     
+    open var sectionInset: UIEdgeInsets {
+        .zero
+    }
+    
     open var headerReferenceSize: CGSize {
         .zero
     }
@@ -59,6 +63,7 @@ open class CollectionViewController<
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        collectionViewFlowLayout?.sectionInset = sectionInset
         collectionViewFlowLayout?.estimatedItemSize = estimatedItemSize
         collectionViewFlowLayout?.minimumLineSpacing = minimumLineSpacing
         collectionViewFlowLayout?.headerReferenceSize = headerReferenceSize
