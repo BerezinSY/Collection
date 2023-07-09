@@ -15,6 +15,10 @@ open class CollectionViewController<
         CGSize(width: 50, height: 50)
     }
     
+    open var headerReferenceSize: CGSize {
+        CGSize(width: 0, height: 0)
+    }
+    
     private var collectionViewFlowLayout: UICollectionViewFlowLayout? {
         collectionViewLayout as? UICollectionViewFlowLayout
     }
@@ -48,6 +52,7 @@ open class CollectionViewController<
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionViewFlowLayout?.estimatedItemSize = estimatedItemSize
+        collectionViewFlowLayout?.headerReferenceSize = headerReferenceSize
     }
     
     // MARK: UICollectionViewDataSource
