@@ -69,7 +69,7 @@ open class CollectionViewController<
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard content[section].isShowHeader else { return .zero }
+//        guard content[section].isShowHeader else { return .zero }
         return layoutModel.insetForSection(at: section)
     }
     
